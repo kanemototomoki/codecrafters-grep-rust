@@ -4,9 +4,19 @@ use std::process;
 
 fn match_pattern(input_line: &str, pattern: &str) -> bool {
     if pattern.chars().count() == 1 {
-        return input_line.contains(pattern);
+        input_line.contains(pattern)
     } else {
-        panic!("Unhandled pattern: {}", pattern)
+        match pattern {
+            r"\d" => {
+                let res = input_line.chars().find(|c| c.is_numeric());
+                if res.is_none() {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            _ => panic!("Unhandled pattern: {}", pattern),
+        }
     }
 }
 
