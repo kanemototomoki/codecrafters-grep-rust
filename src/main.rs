@@ -8,7 +8,17 @@ fn match_pattern(input_line: &str, pattern: &str) -> bool {
     } else {
         match pattern {
             r"\d" => {
-                let res = input_line.chars().find(|c| c.is_numeric());
+                let res = input_line.chars().find(|&c| c.is_numeric());
+                if res.is_none() {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            r"\w" => {
+                let res = input_line
+                    .chars()
+                    .find(|&c| (c.is_ascii_alphanumeric() || c == '_'));
                 if res.is_none() {
                     return false;
                 } else {
